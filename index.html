@@ -12,6 +12,31 @@
     <title>Weather dashboard</title>
   </head>
   <body>
+    <header></header>
+    <div class="row">
+      <div id="history-column" class="col-3">
+        <h2>Search for a City:</h2> 
+        <div id="search-bar">
+            <input type="text" name="search" id="search"/>
+            <button type="submit" id="search-button" class="btn alert alert-danger">
+                <span></span>
+            </button>
+        </div>
+        <div id="search-history"></div>
+      </div>
+      <div id="weather information" class="col-9">
+          <div class="row">
+              <div id="forcast-today"></div>
+          </div>
+          <div class="row">
+              <div class="col-2"></div>
+              <div class="col-2"></div>
+              <div class="col-2"></div>
+              <div class="col-2"></div>
+              <div class="col-2"></div>
+          </div>
+      </div>
+    </div>
     <script src="./assets/js/dashboard.js"></script>
   </body>
 </html>
