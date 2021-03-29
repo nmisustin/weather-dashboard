@@ -18,3 +18,17 @@
     padding: 0 5px;
     border-radius: 3px;
 }
+.five-day{
+    margin: 5px;
+    color: white;
+}
+.navbar{
+    color: white;
+    background-color: rgb(34, 30, 30);
+}
+.blue{
+    background-color: rgb(56, 119, 255);
+}
+#forecast-today{
+    padding: 15px;
+}

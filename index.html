@@ -8,32 +8,44 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
+    <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" 
+    />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather dashboard</title>
   </head>
   <body>
-    <header></header>
+    <nav class="navbar">
+        <h1>Weather Dashboard</h1>
+    </nav>
     <div class="row">
       <div id="history-column" class="col-3 container">
         <h2>Search for a City:</h2> 
-        <div id="search-bar">
-            <input type="text" name="search" id="search"/>
-            <button type="submit" id="search-button" class="btn alert alert-danger">
-                <span></span>
+        <div class="input-group mb-3" id="search-bar">
+            <input type="text" class="form-control" name="search" id="search"/>
+            <button type="button" id="search-button" class="btn btn-primary">
+              <span class="oi oi-magnifying-glass"></span>
             </button>
         </div>
-        <div id="search-history"></div>
+        <div id="search-history">
+          <ul class="list-group" id="search-list">
+
+          </ul>
+        </div>
       </div>
       <div id="weather information" class="col-9 container">
           <div class="row">
-              <div id="forcast-today"></div>
+              <div class="card col-11" id="forcast-today">
+              </div>
           </div>
+          <div class="row" id="five-day-header"></div>
           <div class="row">
-              <div class="col-2" id="five-day-1"></div>
-              <div class="col-2" id="five-day-2"></div>
-              <div class="col-2" id="five-day-3"></div>
-              <div class="col-2" id="five-day-4"></div>
-              <div class="col-2" id= "five-day-5"></div>
+              <div class="col-2 card five-day" id="five-day-1"></div>
+              <div class="col-2 card five-day" id="five-day-2"></div>
+              <div class="col-2 card five-day" id="five-day-3"></div>
+              <div class="col-2 card five-day" id="five-day-4"></div>
+              <div class="col-2 card five-day" id= "five-day-5"></div>
           </div>
       </div>
     </div>

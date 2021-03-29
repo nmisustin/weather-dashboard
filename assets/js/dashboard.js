@@ -1,10 +1,12 @@
 var searchBar = document.getElementById("search");
 var searchButton = document.getElementById("search-button");
+var searchHistory = document.getElementById("search-history");
+var searchList = document.getElementById("search-list");
 var pastCities = [];
+var mostRecent = ""
 var farenheit = " &#8457;"
 var todaysDate = moment().format("MMMM Do YYYY");
 var currentCityLocation = {lat:"", lon:""}
-var currentData = {temperature: "", humidity:"", windSpeed: "", uvIndex: ""}
 var fiveDayForecast = [document.getElementById("five-day-1"), 
     document.getElementById("five-day-2"), 
     document.getElementById("five-day-3"), 
@@ -19,14 +21,11 @@ function getCurrentCityData(city){
             .then(function(data){
                 console.log(data);
                 var currentWeatherEl = document.getElementById("forcast-today");
+                currentWeatherEl.innerHTML = "";
                 var header = document.createElement("h2")
                 var weatherSymbol = "http://openweathermap.org/img/wn/"+ data.weather[0].icon+".png"
-                var weatherSymbolEl = document.createElement("img");
-                weatherSymbolEl.setAttribute("src", weatherSymbol);
-                console.log (weatherSymbolEl)
-                header.textContent = city + " ("+todaysDate+")";
+                header.innerHTML = city + " ("+todaysDate+")<img src='" + weatherSymbol + "'/>";
                 currentWeatherEl.appendChild(header);
-                currentWeatherEl.appendChild(weatherSymbolEl);
                 var temperature= data.main.temp;
                 var temperatureEl = document.createElement("p")
                 temperatureEl.innerHTML ="Temperature: " +temperature+farenheit;
@@ -65,7 +64,14 @@ function getCurrentCityData(city){
                             var uvIndexEl = document.createElement("p")
                             uvIndexEl.innerHTML="UV Index: <span class = '" + uvColor +"'>"+uvIndex+"</span>"
                             currentWeatherEl.appendChild(uvIndexEl)
+                            var fiveDayHeader = document.getElementById("five-day-header");
+                            var header = document.createElement("h2");
+                            header.innerHTML= "Five Day Forecast:";
+                            fiveDayHeader.appendChild(header);
                             for (var i =0; i < fiveDayForecast.length; i++){
+                                //fiveDayForecast[i].setAttribute("class", "five-day")
+                                fiveDayForecast[i].innerHTML=""
+                                fiveDayForecast[i].classList.add("blue")
                                 var date = moment().add(1+i, "days");
                                 date = date.format("M/D/YY");
                                 dateEl=document.createElement("p")
@@ -106,5 +112,40 @@ function getCurrentCityData(city){
 function getSearchCity(){
     var city = searchBar.value.trim();
     getCurrentCityData(city);
+    pastCities.push(city);
+    console.log(pastCities);
+    mostRecent = city;
+    localStorage.setItem("mostRecent", mostRecent);
+    localStorage.setItem("pastCities", JSON.stringify(pastCities))
+    searchBar.value= "";
+    displaySearchHistory();
 }
+function displaySearchHistory(){
+    searchList.innerHTML= "";
+    for (var i=0; i<pastCities.length; i++){
+        var historyButton= document.createElement("button");
+        historyButton.setAttribute("value", pastCities[i]);
+        historyButton.setAttribute("type", "button");
+        historyButton.setAttribute("class", "list-group-item list-group-item-action");
+        historyButton.innerHTML = pastCities[i];
+        searchList.appendChild(historyButton);
+    }
+}
+function searchHistoryClick(event){
+    var city = event.target.getAttribute("value");
+    getCurrentCityData(city);
+    mostRecent = city;
+    localStorage.setItem("mostRecent", mostRecent);
+}
+function loadHistory(){
+    var loadCities = localStorage.getItem("pastCities");
+    loadCities=JSON.parse(loadCities);
+    console.log(loadCities);
+    pastCities = loadCities;
+    displaySearchHistory(pastCities);
+    var mostRecent = localStorage.getItem("mostRecent");
+    getCurrentCityData(mostRecent);    
+}
+loadHistory();
+searchHistory.addEventListener("click", searchHistoryClick);
 searchButton.addEventListener("click", getSearchCity);
