@@ -65,6 +65,7 @@ function getCurrentCityData(city){
                             uvIndexEl.innerHTML="UV Index: <span class = '" + uvColor +"'>"+uvIndex+"</span>"
                             currentWeatherEl.appendChild(uvIndexEl)
                             var fiveDayHeader = document.getElementById("five-day-header");
+                            fiveDayHeader.innerHTML = "";
                             var header = document.createElement("h2");
                             header.innerHTML= "Five Day Forecast:";
                             fiveDayHeader.appendChild(header);
