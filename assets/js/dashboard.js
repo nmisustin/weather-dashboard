@@ -23,7 +23,7 @@ function getCurrentCityData(city){
                 var currentWeatherEl = document.getElementById("forcast-today");
                 currentWeatherEl.innerHTML = "";
                 var header = document.createElement("h2")
-                var weatherSymbol = "http://openweathermap.org/img/wn/"+ data.weather[0].icon+".png"
+                var weatherSymbol = "https://openweathermap.org/img/wn/"+ data.weather[0].icon+".png"
                 header.innerHTML = city + " ("+todaysDate+")<img src='" + weatherSymbol + "'/>";
                 currentWeatherEl.appendChild(header);
                 var temperature= data.main.temp;
@@ -78,7 +78,7 @@ function getCurrentCityData(city){
                                 dateEl=document.createElement("p")
                                 dateEl.innerHTML = date;
                                 fiveDayForecast[i].appendChild(dateEl);
-                                var weatherSymbol = "http://openweathermap.org/img/wn/"+ data.daily[i].weather[0].icon +".png"
+                                var weatherSymbol = "https://openweathermap.org/img/wn/"+ data.daily[i].weather[0].icon +".png"
                                 var weatherSymbolEl = document.createElement("img");
                                 weatherSymbolEl.setAttribute("src", weatherSymbol);
                                 fiveDayForecast[i].appendChild(weatherSymbolEl);
