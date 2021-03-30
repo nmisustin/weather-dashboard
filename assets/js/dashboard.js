@@ -141,11 +141,14 @@ function searchHistoryClick(event){
 function loadHistory(){
     var loadCities = localStorage.getItem("pastCities");
     loadCities=JSON.parse(loadCities);
-    console.log(loadCities);
-    pastCities = loadCities;
-    displaySearchHistory(pastCities);
-    var mostRecent = localStorage.getItem("mostRecent");
-    getCurrentCityData(mostRecent);    
+    if (loadCities != null){
+        console.log(loadCities);
+        pastCities = loadCities;
+        displaySearchHistory(pastCities);
+        var mostRecent = localStorage.getItem("mostRecent");
+        getCurrentCityData(mostRecent); 
+    }
+       
 }
 loadHistory();
 searchHistory.addEventListener("click", searchHistoryClick);
